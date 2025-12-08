@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 0%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 0% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 0%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 0%;
+
+    --radius: 0px;
+
+    /* Pixel design tokens */
+    --pixel-border: 2px;
+    --pixel-shadow: 4px 4px 0px hsl(0 0% 0%);
+    --pixel-shadow-hover: 2px 2px 0px hsl(0 0% 0%);
+  }
+
+  .dark {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    image-rendering: pixelated;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Press Start 2P', cursive;
+  }
+}
+
+@layer components {
+
+  /* Pixel grid background */
+  .pixel-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--foreground) / 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.03) 1px, transparent 1px);
+    background-size: 8px 8px;
+  }
+
+  /* Pixel border card */
+  .pixel-card {
+    border: var(--pixel-border) solid hsl(var(--foreground));
+    box-shadow: var(--pixel-shadow);
+    transition: all 0.1s ease;
+  }
+
+  .pixel-card:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--pixel-shadow-hover);
+  }
+
+  /* Pixel button */
+  .pixel-button {
+    border: var(--pixel-border) solid hsl(var(--foreground));
+    box-shadow: var(--pixel-shadow);
+    font-family: 'Press Start 2P', cursive;
+    transition: all 0.1s ease;
+    position: relative;
+  }
+
+  .pixel-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--pixel-shadow-hover);
+  }
+
+  .pixel-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+  }
+
+  /* Pixel input */
+  .pixel-input {
+    border: var(--pixel-border) solid hsl(var(--foreground));
+    background: hsl(var(--background));
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+  }
+
+  .pixel-input:focus {
+    outline: none;
+    box-shadow: inset 2px 2px 0px hsl(var(--foreground) / 0.1);
+  }
+
+  /* Pixel shake animation */
+  @keyframes pixel-shake {
+
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(-2px, 0);
+    }
+
+    50% {
+      transform: translate(2px, 0);
+    }
+
+    75% {
+      transform: translate(-2px, 0);
+    }
+  }
+
+  .pixel-shake:hover {
+    animation: pixel-shake 0.3s ease-in-out;
+  }
+
+  /* Pixel jump animation */
+  @keyframes pixel-jump {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  .pixel-jump:hover {
+    animation: pixel-jump 0.2s ease-in-out;
+  }
+
+  /* 8-bit scanline effect */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 2px,
+        hsl(var(--foreground) / 0.02) 2px,
+        hsl(var(--foreground) / 0.02) 4px);
+    pointer-events: none;
+  }
+
+  /* Animated underline pixel style */
+  .pixel-underline {
+    position: relative;
+  }
+
+  .pixel-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--foreground));
+    transition: width 0.2s steps(8);
+  }
+
+  .pixel-underline:hover::after {
+    width: 100%;
+  }
+
+  /* Retro blink animation */
+  @keyframes blink {
+
+    0%,
+    50% {
+      opacity: 1;
+    }
+
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .pixel-blink {
+    animation: blink 1s steps(1) infinite;
+  }
+
+  /* Pixel scale effect */
+  @keyframes pixel-scale {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .pixel-pulse:hover {
+    animation: pixel-scale 0.3s steps(3);
+  }
+
+  /* Marquee animation */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .marquee {
+    animation: marquee 20s linear infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-pixel-title {
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  .font-pixel-body {
+    font-family: 'VT323', monospace;
+  }
+}
