@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.sportifytech.co.in/sitemap.xml
+Sitemap: https://sportifytech.co.in/sitemap.xml
